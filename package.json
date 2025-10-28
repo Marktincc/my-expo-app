@@ -8,17 +8,26 @@
     "prebuild": "expo prebuild",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "reset-project": "rm -rf node_modules && rm -f package-lock.json && npx expo start -c && npm install"
   },
   "dependencies": {
+    "@expo/vector-icons": "^15.0.3",
     "expo": "^54.0.0",
+    "expo-haptics": "~15.0.7",
+    "expo-router": "~6.0.13",
     "expo-status-bar": "~3.0.8",
-    "nativewind": "latest",
+    "nativewind": "^4.2.1",
     "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-native": "0.81.5",
+    "react-native-css-interop": "^0.2.1",
     "react-native-reanimated": "~4.1.1",
     "react-native-safe-area-context": "~5.6.0",
-    "react-native-worklets": "0.5.1"
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0",
+    "react-native-worklets": "0.5.1",
+    "tailwindcss": "^3.4.18"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -27,10 +36,9 @@
     "eslint-config-expo": "~10.0.0",
     "eslint-config-prettier": "^10.1.2",
     "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "typescript": "~5.9.2"
   },
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo-router/entry",
   "private": true
 }
