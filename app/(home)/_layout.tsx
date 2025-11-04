@@ -8,7 +8,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
 
-  // 🎨 Colores según el tema actual
+ 
   const colors = {
     activeTint: isDark ? "#4FB3BF" : "#4FB3BF", // primary
     inactiveTint: isDark ? "#B0B0B0" : "#828282", // text-secondary
