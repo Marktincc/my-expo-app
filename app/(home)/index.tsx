@@ -47,6 +47,16 @@ export default function HomeScreen() {
             Find nearby places
           </ThemedText>
         </Pressable>
+         <Pressable
+          onPress={() => router.push('/(home)/restaurant')}
+          className="bg-surface dark:bg-surface-dark p-4 rounded-lg flex-1 m-2 items-center"
+        >
+          <Ionicons name="restaurant-outline" size={48} color={Colors.light.tint} />
+          <ThemedText className="text-lg font-bold mt-2 text-text-primary dark:text-text-dark">Restaurants</ThemedText>
+          <ThemedText className="text-center text-text-secondary dark:text-text-dark-secondary">
+            Find nearby restaurants
+          </ThemedText>
+        </Pressable>
       </View>
     </ThemedView>
   );

@@ -18,7 +18,8 @@
         {
           "motionPermission": "Allow $(PRODUCT_NAME) to access your motion and fitness data to count your steps."
         }
-      ]
+      ],
+      "expo-maps"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
