@@ -2,12 +2,31 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { app } from '../firebase.config';
 
 export default function LoginScreen() {
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+
+  const auth = getAuth(app);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('User logged in:', user);
+      router.replace('/(home)');
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
+
 
   return (
     <KeyboardAvoidingView
@@ -50,6 +69,8 @@ export default function LoginScreen() {
                 autoCapitalize="none"
                 onFocus={() => setEmailFocused(true)}
                 onBlur={() => setEmailFocused(false)}
+                value={email}
+                onChangeText={setEmail}
               />
             </View>
 
@@ -67,7 +88,9 @@ export default function LoginScreen() {
                   placeholderTextColor="#828282"
                   secureTextEntry={!passwordVisible}
                   onFocus={() => setPasswordFocused(true)}
-                  onBlur={() => setPasswordFocused(false)}
+                  onBlur={() => setPasswordFocused(false)}  
+                  value={password}
+                  onChangeText={setPassword}
                 />
                 <TouchableOpacity 
                   onPress={() => setPasswordVisible(!passwordVisible)} 
@@ -94,7 +117,7 @@ export default function LoginScreen() {
             {/* Log In Button */}
             <TouchableOpacity
               className="h-14 w-full items-center justify-center rounded-xl bg-primary active:bg-primary-dark"
-              onPress={() => router.push('/(home)')}
+              onPress={handleLogin}
             >
               <Text className="text-white text-base font-bold">Log In</Text>
             </TouchableOpacity>

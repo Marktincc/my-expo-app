@@ -22,7 +22,7 @@ The project is designed for **Android**, **iOS**, and **Web**, maintaining visua
 | **Navigation** | Expo Router |
 | **Styling** | Tailwind CSS v4 + NativeWind |
 | **UI Components** | Custom themed components (`ThemedText`, `ThemedView`) |
-| **Icons** | @expo/vector-icons |
+| **Icons** | <!-- Import failed: expo/vector-icons - ENOENT: no such file or directory, access '/mnt/c/Users/ACER/Downloads/prueba-exoi/my-app/my-expo-app/expo/vector-icons' --> |
 | **Safe Areas** | react-native-safe-area-context |
 
 ---
@@ -74,4 +74,3 @@ This palette is optimized for **health and wellness** applications, transmitting
 ---
 
 ## 📁 Project Structure
-

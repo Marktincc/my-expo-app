@@ -10,6 +10,8 @@ import {
   Platform,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import { app } from '../firebase.config';
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -19,6 +21,31 @@ export default function RegisterScreen() {
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
+
+  const auth = getAuth(app);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const confirmPasswordsMatch = () => {
+    return password === confirmPassword;
+  };
+
+  const handleRegister = async () => {
+    if (!confirmPasswordsMatch()) {
+      console.error('Passwords do not match');
+      return;
+    }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('User registered:', user);
+      router.replace('/(home)');
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -45,22 +72,6 @@ export default function RegisterScreen() {
               </Text>
             </View>
 
-            {/* Full Name */}
-            <View className="w-full mb-4">
-              <Text className="text-sm font-medium mb-2 text-text-primary-light dark:text-text-primary-dark">
-                Full Name
-              </Text>
-              <TextInput
-                className={`w-full h-14 rounded-xl border-2 bg-surface-light dark:bg-surface-dark px-4 text-base text-text-primary-light dark:text-text-primary-dark outline-none ${
-                  nameFocused ? 'border-primary' : 'border-border-light dark:border-border-dark'
-                }`}
-                placeholder="Enter your full name"
-                placeholderTextColor="#828282"
-                onFocus={() => setNameFocused(true)}
-                onBlur={() => setNameFocused(false)}
-              />
-            </View>
-
             {/* Email */}
             <View className="w-full mb-4">
               <Text className="text-sm font-medium mb-2 text-text-primary-light dark:text-text-primary-dark">
@@ -76,6 +87,8 @@ export default function RegisterScreen() {
                 autoCapitalize="none"
                 onFocus={() => setEmailFocused(true)}
                 onBlur={() => setEmailFocused(false)}
+                value={email}
+                onChangeText={setEmail}
               />
             </View>
 
@@ -94,6 +107,8 @@ export default function RegisterScreen() {
                   secureTextEntry={!passwordVisible}
                   onFocus={() => setPasswordFocused(true)}
                   onBlur={() => setPasswordFocused(false)}
+                  value={password}
+                  onChangeText={setPassword}
                 />
                 <TouchableOpacity
                   onPress={() => setPasswordVisible(!passwordVisible)}
@@ -123,6 +138,8 @@ export default function RegisterScreen() {
                   secureTextEntry={!confirmPasswordVisible}
                   onFocus={() => setConfirmPasswordFocused(true)}
                   onBlur={() => setConfirmPasswordFocused(false)}
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
                 />
                 <TouchableOpacity
                   onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
@@ -140,7 +157,7 @@ export default function RegisterScreen() {
             {/* Register Button */}
             <TouchableOpacity
               className="w-full h-14 rounded-xl bg-primary items-center justify-center active:bg-primary-dark"
-              onPress={() => router.push('/login')}
+              onPress={handleRegister}
             >
               <Text className="text-white font-bold text-base">Register</Text>
             </TouchableOpacity>

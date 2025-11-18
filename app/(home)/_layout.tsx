@@ -8,12 +8,11 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
 
- 
   const colors = {
-    activeTint: isDark ? "#4FB3BF" : "#4FB3BF", // primary
-    inactiveTint: isDark ? "#B0B0B0" : "#828282", // text-secondary
-    background: isDark ? "#121212" : "#F7F9FA", // background
-    border: isDark ? "#333333" : "#E0E0E0", // border
+    activeTint: isDark ? "#4FB3BF" : "#4FB3BF",
+    inactiveTint: isDark ? "#B0B0B0" : "#828282",
+    background: isDark ? "#121212" : "#F7F9FA",
+    border: isDark ? "#333333" : "#E0E0E0",
   };
 
   return (
@@ -26,7 +25,6 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.border,
-          height: 70,
           paddingBottom: 8,
           paddingTop: 8,
         },
@@ -45,28 +43,42 @@ export default function TabLayout() {
           ),
         }}
       />
-
+      
       <Tabs.Screen
-        name="form"
+        name="sensors"
         options={{
-          title: "Form",
+          title: "Sensors",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? "list" : "list-outline"}
+              name={focused ? "hardware-chip" : "hardware-chip-outline"}
               size={26}
               color={color}
             />
           ),
         }}
       />
-
+      
       <Tabs.Screen
-        name="explore"
+        name="places"
         options={{
-          title: "Explore",
+          title: "Places",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? "paper-plane" : "paper-plane-outline"}
+              name={focused ? "map" : "map-outline"}
+              size={26}
+              color={color}
+            />
+          ),
+        }}
+      />
+      
+      <Tabs.Screen
+        name="signout"
+        options={{
+          title: "Sign Out",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "log-out" : "log-out-outline"}
               size={26}
               color={color}
             />
